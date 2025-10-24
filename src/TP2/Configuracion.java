@@ -23,17 +23,4 @@ public class Configuracion {
 		this.archivoSalida = directorioBase + "/"+  archivoSalida;
 	}
 	
-	public boolean verificarValores(int vecino1, int vecino2, int valor)
-	{
-		return (vecinoEnRango(vecino1) && vecinoEnRango(vecino2) && lazoEnRango(valor));
-	}
-	private boolean vecinoEnRango(int num)
-	{
-		return num>=limiteInferiorVecinos && num<=limiteSuperiorVecinos;
-	}
-	private boolean lazoEnRango(int num)
-	{
-		return num>=limiteInferiorFuerzaLazos && num<=limiteSuperiorFuerzaLazos;
-	}
-	
 }
