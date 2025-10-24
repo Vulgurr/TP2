@@ -1,0 +1,7 @@
+limiteInferiorVecinos=1
+limiteSuperiorVecinos=200
+limiteLazos=5000
+limiteInferiorFuerzaLazos=1
+limiteSuperiorFuerzaLazos=100
+archivoEntrada="ALIADOS.IN"
+archivoSalida="ALIADOS.OUT"

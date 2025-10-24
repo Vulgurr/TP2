@@ -1,5 +1,7 @@
 package Main;
 
+import java.io.IOException;
+
 import TP2.GestorArchivos;
 
 
@@ -19,10 +21,17 @@ public class Main {
 //		gestor.agregarAmistades(6, 1, 2);
 //		int[] amistades = gestor.determinarAliados();
 //		System.out.println(amistades[0] + " " + amistades[1]);
-		GestorArchivos archivos = new GestorArchivos();
-		archivos.leerArchivoEntrada();
-		archivos.exportarResultado();
-		System.out.println("Listo");
+		GestorArchivos archivos;
+		try {
+			archivos = new GestorArchivos("./archivos");
+			archivos.leerArchivoEntrada();
+			archivos.exportarResultado();
+			System.out.println("Listo");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

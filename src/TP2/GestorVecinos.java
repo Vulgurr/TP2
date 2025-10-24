@@ -50,4 +50,8 @@ public class GestorVecinos {
 		}
 		return aliados;
 	}
+	public int getCantidadVecinos()
+	{
+		return totalVecinosAConsiderar.size()-1;
+	}
 }
