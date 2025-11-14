@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GestorArchivos {
-	GestorVecinos gestor;
 	int cantidadVecinos;
 	int cantidadLazos;
 	Configuracion config;
@@ -64,13 +65,15 @@ public class GestorArchivos {
 	    }
 		return null;
 	}
-	public void leerArchivoEntrada()
+	public int[] leerPrimeraLinea()
 	{
+		int[] valores = new int[4];
+		int[] vecinos = new int[2];
 	    try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
 	        String linea;
 	        
 	        linea = br.readLine();
-	        int[] valores = Arrays.stream(linea.split(" "))
+	        valores = Arrays.stream(linea.split(" "))
                     .mapToInt(Integer::parseInt)
                     .toArray();
 	     // ---------------------------------------
@@ -78,9 +81,25 @@ public class GestorArchivos {
 	     // ---------------------------------------
 	        cantidadVecinos=valores[0];
 	        cantidadLazos=valores[1];
-	        gestor = new GestorVecinos(valores[2], valores[3]);
+	        vecinos[0]=valores[2];
+	        vecinos[1]=valores[3];
+	    }
+	    catch (IOException e) {
+	    	 // ---------------------------------------
+		     // Manejar tipos de excepciones y mensajes
+		     // ---------------------------------------
+	        e.printStackTrace();
+	    }
+	    return vecinos;
+	}
+	public void leerArchivoConGestor(GestorVecinos gestor)
+	{
+		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
+		String linea;
 	        int cont=2;
 	        int contLazos=0;
+	        linea = br.readLine(); //Para saltar la primera linea
+	        int[] valores = new int[3];
 	        while ((linea = br.readLine()) != null) {
 	        	
 	        	valores = Arrays.stream(linea.split(" "))
@@ -106,9 +125,51 @@ public class GestorArchivos {
 	    }
 	    
 	}
-	public void exportarResultado()
+	
+	public Registro[] leerArchivoSinGestor()
 	{
-		int[] aliados = gestor.determinarAliados();
+		Registro[] registros=new Registro[cantidadLazos];
+		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
+		String linea;
+		
+		Set<Integer> vecinos= new HashSet<Integer>();
+		
+	        int cont=2;
+	        int contLazos=0;
+	        linea = br.readLine(); //Para saltar la primera linea
+	        int[] valores = new int[3];
+	        while ((linea = br.readLine()) != null) {
+	        	
+	        	valores = Arrays.stream(linea.split(" "))
+	                    .mapToInt(Integer::parseInt)
+	                    .toArray();
+	        	 // ---------------------------------------
+		   	     verificacion.enLinea(valores, cont);
+		   	     // ---------------------------------------
+		   	     
+		   	     vecinos.add(valores[0]);
+		   	     vecinos.add(valores[1]);
+		   	     
+	        	registros[contLazos]=new Registro(valores[0], valores[1], valores[2]);
+	        	cont++;
+	        	contLazos++;
+	        }
+
+	        // ---------------------------------------
+	        verificacion.finalDeLectura(contLazos, cantidadLazos, vecinos.size(), cantidadVecinos);
+	        
+		     // ---------------------------------------
+	    } catch (IOException e) {
+	    	 // ---------------------------------------
+		     // Manejar tipos de excepciones y mensajes
+		     // ---------------------------------------
+	        e.printStackTrace();
+	    }
+		return registros;
+	    
+	}
+	public void exportarResultado(int[] aliados)
+	{
 		String linea=aliados[0] + " " + aliados[1];
         try {
             Files.write(Paths.get(config.archivoSalida), Arrays.asList(linea));

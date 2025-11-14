@@ -30,7 +30,7 @@ class testGestorArchivos {
 	void cantidadDeVecinosIncorrecta() {
 		fail("Not yet implemented");
 	}
-
+	
 	@Test
 	void lazoPropioFalla() {
 		fail("Not yet implemented");
