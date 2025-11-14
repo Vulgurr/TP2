@@ -9,7 +9,7 @@ public class Verificacion {
 	public boolean primeraLinea(int[] valores)
 	{
 		if ((valores.length != 4 || ! vecinoEnRango(valores[0]) 
-			|| valores[1]>conf.limiteLazos || valores[2]==valores[3]))
+			|| valores[1]>conf.limiteLazos))
 		{
 			throw new IllegalArgumentException("Primera linea contiene errores");
 		}
@@ -20,7 +20,7 @@ public class Verificacion {
 	public boolean enLinea(int[] valores, int cont)
 	{
 		if(valores.length == 3 &&vecinoEnRango(valores[0])  && vecinoEnRango(valores[1]) 
-				&& lazoEnRango(valores[2]) && valores[0] != valores[1])
+				&& lazoEnRango(valores[2]))
 		{
 			return true;
 		}
@@ -29,6 +29,9 @@ public class Verificacion {
 	
 	public boolean finalDeLectura(int contLazos, int cantidadLazos, int contVecinos, int cantidadVecinos)
 	{
+		
+		System.out.println(contVecinos);
+		System.out.println(cantidadVecinos);
 		if(contLazos != cantidadLazos || cantidadVecinos != contVecinos)
         {
         	throw new IllegalArgumentException("No se cumplieron los lazos y cantidad de vecinos establecidos");
