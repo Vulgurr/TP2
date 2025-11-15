@@ -126,48 +126,6 @@ public class GestorArchivos {
 	    
 	}
 	
-	public Registro[] leerArchivoSinGestor()
-	{
-		Registro[] registros=new Registro[cantidadLazos];
-		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
-		String linea;
-		
-		Set<Integer> vecinos= new HashSet<Integer>();
-		
-	        int cont=2;
-	        int contLazos=0;
-	        linea = br.readLine(); //Para saltar la primera linea
-	        int[] valores = new int[3];
-	        while ((linea = br.readLine()) != null) {
-	        	
-	        	valores = Arrays.stream(linea.split(" "))
-	                    .mapToInt(Integer::parseInt)
-	                    .toArray();
-	        	 // ---------------------------------------
-		   	     verificacion.enLinea(valores, cont);
-		   	     // ---------------------------------------
-		   	     
-		   	     vecinos.add(valores[0]);
-		   	     vecinos.add(valores[1]);
-		   	     
-	        	registros[contLazos]=new Registro(valores[0], valores[1], valores[2]);
-	        	cont++;
-	        	contLazos++;
-	        }
-
-	        // ---------------------------------------
-	        verificacion.finalDeLectura(contLazos, cantidadLazos, vecinos.size(), cantidadVecinos);
-	        
-		     // ---------------------------------------
-	    } catch (IOException e) {
-	    	 // ---------------------------------------
-		     // Manejar tipos de excepciones y mensajes
-		     // ---------------------------------------
-	        e.printStackTrace();
-	    }
-		return registros;
-	    
-	}
 	public void exportarResultado(int[] aliados)
 	{
 		String linea=aliados[0] + " " + aliados[1];

@@ -64,12 +64,7 @@ public class GestorVecinos {
 		}
 		return aliados;
 	}
-	public void agregarAmistades(Registro[] registros)
-	{
-		for (Registro r : registros) {
-			this.agregarAmistades(r.getVecino1(), r.getVecino2(), r.getValor());
-		}
-	}
+
 
 	public int getCantidadVecinos() {
 		return totalVecinosAConsiderar.size() - 1;
