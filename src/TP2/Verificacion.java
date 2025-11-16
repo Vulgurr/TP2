@@ -19,19 +19,22 @@ public class Verificacion {
 	
 	public boolean enLinea(int[] valores, int cont)
 	{
-		if(valores.length == 3 &&vecinoEnRango(valores[0])  && vecinoEnRango(valores[1]) 
+		if(valores.length == 3 && vecinoEnRango(valores[0]) && vecinoEnRango(valores[1]) 
 				&& lazoEnRango(valores[2]))
 		{
 			return true;
 		}
-		throw new IllegalArgumentException("La linea "+cont +" contiene errores");
+		throw new IllegalArgumentException("La linea "+ cont +" contiene errores");
 	}
 	
 	public boolean finalDeLectura(int contLazos, int cantidadLazos, int contVecinos, int cantidadVecinos)
 	{
-		
-		System.out.println(contVecinos);
-		System.out.println(cantidadVecinos);
+
+		//System.out.println("Cont Lazos: " + contLazos);
+		//System.out.println("Cant Lazos: " + cantidadLazos);
+		//System.out.println("Cont Vecinos: " + contVecinos);
+		//System.out.println("Cant Vecinos: " + cantidadVecinos);
+
 		if(contLazos != cantidadLazos || cantidadVecinos != contVecinos)
         {
         	throw new IllegalArgumentException("No se cumplieron los lazos y cantidad de vecinos establecidos");
