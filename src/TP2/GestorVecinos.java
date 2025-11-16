@@ -48,8 +48,11 @@ public class GestorVecinos {
 			lider1.agregarAmistad(numero2, valor);
 		else if (numero2 == idLider1)
 			lider1.agregarAmistad(numero1, valor);
-		totalVecinosAConsiderar.add(numero1);
-		totalVecinosAConsiderar.add(numero2);
+		
+		if (numero1 != idLider1 && numero1 != idLider2)
+			totalVecinosAConsiderar.add(numero1);
+		if (numero2 != idLider1 && numero2 != idLider2)
+			totalVecinosAConsiderar.add(numero2);
 	}
 
 	public int[] determinarAliados() {
@@ -65,8 +68,7 @@ public class GestorVecinos {
 		return aliados;
 	}
 
-
-	public int getCantidadVecinos() {
-		return totalVecinosAConsiderar.size() - 1;
+	public int getCantidadVecinosAConsiderar() {
+		return totalVecinosAConsiderar.size();
 	}
 }

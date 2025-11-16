@@ -98,6 +98,7 @@ public class GestorArchivos {
 		String linea;
 	        int cont=2;
 	        int contLazos=0;
+	        Set<Integer> totalVecinos = new HashSet<Integer>();
 	        linea = br.readLine(); //Para saltar la primera linea
 	        int[] valores = new int[3];
 	        while ((linea = br.readLine()) != null) {
@@ -109,14 +110,16 @@ public class GestorArchivos {
 		   	     verificacion.enLinea(valores, cont);
 		   	     // ---------------------------------------
 	        	gestor.agregarAmistades(valores[0], valores[1], valores[2]);
+	        	totalVecinos.add(valores[0]);
+	        	totalVecinos.add(valores[1]);
 	        	cont++;
 	        	contLazos++;
 	        }
-
-	        // ---------------------------------------
-	        verificacion.finalDeLectura(contLazos, cantidadLazos, gestor.getCantidadVecinos()+2, cantidadVecinos);
 	        
-		     // ---------------------------------------
+	        // ---------------------------------------
+	        verificacion.finalDeLectura(contLazos, cantidadLazos, totalVecinos.size(), cantidadVecinos);
+	        // ---------------------------------------
+			
 	    } catch (IOException e) {
 	    	 // ---------------------------------------
 		     // Manejar tipos de excepciones y mensajes
