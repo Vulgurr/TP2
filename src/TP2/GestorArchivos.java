@@ -53,6 +53,7 @@ public class GestorArchivos {
 	        archivoEntrada=linea.split("=")[1].replace("\"", "");
 	        linea = br.readLine();
 	        archivoSalida=linea.split("=")[1].replace("\"", "");
+
 	        return new Configuracion(limiteInferiorVecinos, limiteSuperiorVecinos, 
 	        		limiteLazos, limiteInferiorFuerzaLazos, limiteSuperiorFuerzaLazos, 
 	        		directorioBase, archivoEntrada, archivoSalida);
