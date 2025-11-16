@@ -30,8 +30,6 @@ public class Verificacion {
 	public boolean finalDeLectura(int contLazos, int cantidadLazos, int contVecinos, int cantidadVecinos)
 	{
 		
-		System.out.println(contVecinos);
-		System.out.println(cantidadVecinos);
 		if(contLazos != cantidadLazos || cantidadVecinos != contVecinos)
         {
         	throw new IllegalArgumentException("No se cumplieron los lazos y cantidad de vecinos establecidos");
