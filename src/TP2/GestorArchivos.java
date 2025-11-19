@@ -64,8 +64,8 @@ public class GestorArchivos {
 	}
 
 	public int[] leerPrimeraLinea() {
-		int[] valores = new int[4];
-		int[] vecinos = new int[2];
+		int[] datosPrimeraLinea = new int[4];
+		int[] lideres = new int[2];
 		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
 			String linea;
 
@@ -78,36 +78,40 @@ public class GestorArchivos {
 				throw new IllegalArgumentException("El archivo está vacío");
 			}
 			try {
-				valores = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
+				datosPrimeraLinea = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
 				// ---------------------------------------
-				verificacion.primeraLinea(valores);
+				verificacion.primeraLinea(datosPrimeraLinea);
 				// ---------------------------------------
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException("La primera línea no es válida: " + e.getMessage());
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException("La primera línea no es válida: " + e.getMessage());
 			}
-			cantidadVecinos = valores[0];
-			cantidadLazos = valores[1];
-			vecinos[0] = valores[2];
-			vecinos[1] = valores[3];
+			cantidadVecinos = datosPrimeraLinea[0];
+			cantidadLazos = datosPrimeraLinea[1];
+			lideres[0] = datosPrimeraLinea[2];
+			lideres[1] = datosPrimeraLinea[3];
 		} catch (IOException e) {
 			// ---------------------------------------
 			// Manejar tipos de excepciones y mensajes
 			// ---------------------------------------
 			e.printStackTrace();
 		}
-		return vecinos;
+		return lideres;
 	}
 
 	public void leerArchivoConGestor(GestorVecinos gestor) {
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
+			
 			String linea;
 			int cont = 2;
 			int contLazos = 0;
 			linea = br.readLine(); // Para saltar la primera linea
-			int[] valores = new int[3];
+			int[] datosLazo = new int[3];
+			
 			Set<Integer> totalVecinos = new HashSet<Integer>();
+			
 			while ((linea = br.readLine()) != null) {
 				// Ignorar líneas vacías o que solo contengan espacios en blanco
 				if (linea.trim().isEmpty()) {
@@ -115,25 +119,27 @@ public class GestorArchivos {
 					continue;
 				}
 
-				valores = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
+				datosLazo = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
+				
 				// ---------------------------------------
-				verificacion.enLinea(valores, cont);
+				verificacion.enLinea(datosLazo, cont);				
 				// ---------------------------------------
-				gestor.agregarAmistades(valores[0], valores[1], valores[2]);
-				totalVecinos.add(valores[0]);
-				totalVecinos.add(valores[1]);
+				
+				gestor.agregarAmistades(datosLazo[0], datosLazo[1], datosLazo[2]);
+				
+				totalVecinos.add(datosLazo[0]);
+				totalVecinos.add(datosLazo[1]);
+				
 				cont++;
 				contLazos++;
 			}
 
 			// ---------------------------------------
 			verificacion.finalDeLectura(contLazos, cantidadLazos, totalVecinos.size(), cantidadVecinos);
-
 			// ---------------------------------------
+			
+			
 		} catch (IOException e) {
-			// ---------------------------------------
-			// Manejar tipos de excepciones y mensajes
-			// ---------------------------------------
 			e.printStackTrace();
 		}
 

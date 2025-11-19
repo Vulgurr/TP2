@@ -18,8 +18,8 @@ public class GestorVecinos {
 	}
 
 	private boolean verificarLazo(int numero1, int numero2) {
-		if (numero1 != lider1.getNumero() && numero2 != lider1.getNumero() && numero1 != lider2.getNumero()
-				&& numero2 != lider2.getNumero()) {
+		if (numero1 != lider1.getNumero() && numero2 != lider1.getNumero() 
+			&& numero1 != lider2.getNumero() && numero2 != lider2.getNumero()) {
 			// No me interesa una amistad si no es entre los dos vecinos enemistados
 			return false;
 		}
@@ -39,16 +39,16 @@ public class GestorVecinos {
 		if (verificarLazo(numero1, numero2) == false)
 			return;
 
-		if (numero1 == idLider2)
-			lider2.agregarAmistad(numero2, valor);
-		else if (numero2 == idLider2)
-			lider2.agregarAmistad(numero1, valor);
-		else if (numero1 == idLider1)
+		if (numero1 == idLider1)
 			lider1.agregarAmistad(numero2, valor);
 		else if (numero2 == idLider1)
 			lider1.agregarAmistad(numero1, valor);
+		else if (numero1 == idLider2)
+			lider2.agregarAmistad(numero2, valor);
+		else if (numero2 == idLider2)
+			lider2.agregarAmistad(numero1, valor);
 		
-		// Solo agregar vecinos que no son líderes (los líderes no pueden ser aliados de sí mismos)
+		// Solo agregar vecinos que no son líderes 
 		if (numero1 != idLider1 && numero1 != idLider2)
 			totalVecinosAConsiderar.add(numero1);
 		if (numero2 != idLider1 && numero2 != idLider2)
@@ -56,16 +56,19 @@ public class GestorVecinos {
 	}
 
 	public int[] determinarAliados() {
-		int[] aliados = new int[2];
+		
+		int[] v_cantAliados = new int[2];
+		
 		for (Integer vecino : totalVecinosAConsiderar) {
 			int amistad1 = lider1.nivelDeAmistadCon(vecino);
 			int amistad2 = lider2.nivelDeAmistadCon(vecino);
 			if (amistad1 > amistad2)
-				aliados[0]++;
+				v_cantAliados[0]++;
 			else if (amistad2 > amistad1)
-				aliados[1]++;
+				v_cantAliados[1]++;
 		}
-		return aliados;
+		
+		return v_cantAliados;
 	}
 
 	public int getCantidadVecinos() {

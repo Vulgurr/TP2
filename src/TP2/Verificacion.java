@@ -8,7 +8,7 @@ public class Verificacion {
 	}
 
 	public boolean primeraLinea(int[] valores) {
-		if ((valores.length != 4 || !vecinoEnRango(valores[0]) || valores[1] > conf.limiteLazos)) {
+		if ((valores.length != 4 || !vecinoEnRango(valores[0]) || !lazosEnLimite(valores[1]))) {
 			throw new IllegalArgumentException("Primera linea contiene errores");
 		}
 		return true;
@@ -40,5 +40,9 @@ public class Verificacion {
 
 	private boolean lazoEnRango(int num) {
 		return num >= conf.limiteInferiorFuerzaLazos && num <= conf.limiteSuperiorFuerzaLazos;
+	}
+
+	private boolean lazosEnLimite(int cantidadLazos) {
+		return cantidadLazos <= conf.limiteLazos;
 	}
 }
