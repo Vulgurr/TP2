@@ -106,9 +106,14 @@ class GestorArchivosTests {
 		gestor.leerPrimeraLinea();
 		GestorVecinos vecinos = new GestorVecinos(1, 2);
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
 			gestor.leerArchivoConGestor(vecinos);
-		});
+		}, "Expected IllegalArgumentException for cantidad de lazos incorrecta, but received: no exception");
+
+		String expectedMessage = "La cantidad de lazos es incorrecta";
+		String receivedMessage = exception.getMessage();
+		assertEquals(expectedMessage, receivedMessage,
+				"Expected exception message: \"" + expectedMessage + "\", but received: \"" + receivedMessage + "\"");
 	}
 
 	@Test
@@ -119,9 +124,32 @@ class GestorArchivosTests {
 		gestor.leerPrimeraLinea();
 		GestorVecinos vecinos = new GestorVecinos(1, 2);
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
 			gestor.leerArchivoConGestor(vecinos);
-		});
+		}, "Expected IllegalArgumentException for cantidad de vecinos incorrecta, but received: no exception");
+
+		String expectedMessage = "La cantidad de vecinos es incorrecta";
+		String receivedMessage = exception.getMessage();
+		assertEquals(expectedMessage, receivedMessage,
+				"Expected exception message: \"" + expectedMessage + "\", but received: \"" + receivedMessage + "\"");
+	}
+
+	@Test
+	void cantidadDeLazosYVecinosIncorrecta() throws IOException {
+		crearArchivoEntrada("5 3 1 2\n1 2 10\n2 3 5\n");
+
+		GestorArchivos gestor = new GestorArchivos(directorioTest);
+		gestor.leerPrimeraLinea();
+		GestorVecinos vecinos = new GestorVecinos(1, 2);
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			gestor.leerArchivoConGestor(vecinos);
+		}, "Expected IllegalArgumentException for cantidad de lazos y vecinos incorrecta, but received: no exception");
+
+		String expectedMessage = "La cantidad de lazos es incorrecta y la cantidad de vecinos es incorrecta";
+		String receivedMessage = exception.getMessage();
+		assertEquals(expectedMessage, receivedMessage,
+				"Expected exception message: \"" + expectedMessage + "\", but received: \"" + receivedMessage + "\"");
 	}
 
 	@Test

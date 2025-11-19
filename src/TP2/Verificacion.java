@@ -22,9 +22,14 @@ public class Verificacion {
 	}
 
 	public boolean finalDeLectura(int contLazos, int cantidadLazos, int contVecinos, int cantidadVecinos) {
-
-		if (contLazos != cantidadLazos || cantidadVecinos != contVecinos) {
-			throw new IllegalArgumentException("No se cumplieron los lazos y cantidad de vecinos establecidos");
+		if (contLazos != cantidadLazos && cantidadVecinos != contVecinos) {
+			throw new IllegalArgumentException("La cantidad de lazos es incorrecta y la cantidad de vecinos es incorrecta");
+		}
+		if (contLazos != cantidadLazos) {
+			throw new IllegalArgumentException("La cantidad de lazos es incorrecta");
+		}
+		if (cantidadVecinos != contVecinos) {
+			throw new IllegalArgumentException("La cantidad de vecinos es incorrecta");
 		}
 		return true;
 	}

@@ -47,8 +47,12 @@ public class GestorVecinos {
 			lider1.agregarAmistad(numero2, valor);
 		else if (numero2 == idLider1)
 			lider1.agregarAmistad(numero1, valor);
-		totalVecinosAConsiderar.add(numero1);
-		totalVecinosAConsiderar.add(numero2);
+		
+		// Solo agregar vecinos que no son líderes (los líderes no pueden ser aliados de sí mismos)
+		if (numero1 != idLider1 && numero1 != idLider2)
+			totalVecinosAConsiderar.add(numero1);
+		if (numero2 != idLider1 && numero2 != idLider2)
+			totalVecinosAConsiderar.add(numero2);
 	}
 
 	public int[] determinarAliados() {

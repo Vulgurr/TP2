@@ -18,7 +18,7 @@ class GestorVecinosTests {
 		gestor.agregarAmistades(2, 4, 5);
 		gestor.agregarAmistades(5, 6, 8);
 
-		int expectedCantidad = 4;
+		int expectedCantidad = 2;
 		int receivedCantidad = gestor.getCantidadVecinos();
 		assertEquals(expectedCantidad, receivedCantidad,
 				"Expected cantidad de vecinos: " + expectedCantidad + ", but received: " + receivedCantidad);
