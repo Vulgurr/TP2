@@ -19,7 +19,7 @@ public class Main {
 			archivos.leerArchivoConGestor(vecinos);
 			int[] resultadosFinales=vecinos.determinarAliados();
 			archivos.exportarResultado(vecinos.determinarAliados());
-			System.out.println("Fueron grabados en el archivo de salida los siguientes valores");
+			System.out.println("Se grabo correctamente el archivo de salida.");
 			//System.out.println(mostrarResultados(resultadosFinales));
 			enumerarAliados(vecinos, resultadosFinales);
 		} catch (IOException e) {
