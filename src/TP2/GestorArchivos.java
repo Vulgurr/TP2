@@ -16,11 +16,10 @@ public class GestorArchivos {
 	private Verificacion verificacion;
 
 	public GestorArchivos(String path) throws IOException {
-		Configuracion aux;
-		if ((aux = leerConfiguracion(path)) != null) {
-			config = aux;
-		} else
-			throw new IOException("Error en la lectura de la configuracion");
+		config = leerConfiguracion(path);
+	    if (config == null) {
+	        throw new IOException("Error en la lectura de la configuracion");
+	    }
 		verificacion = new Verificacion(config);
 	};
 
