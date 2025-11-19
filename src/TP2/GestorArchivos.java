@@ -27,6 +27,7 @@ public class GestorArchivos {
 	public Configuracion leerConfiguracion(String path) {
 		String directorioBase = path;
 		String directorioConfig = path + "/config.txt";
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(directorioConfig))) {
 			String linea;
 			int limiteInferiorVecinos;

@@ -100,7 +100,7 @@ class GestorArchivosTests {
 
 	@Test
 	void cantidadDeLazosIncorrecta() throws IOException {
-		crearArchivoEntrada("3 3 1 2\n1 2 10\n2 3 5\n");
+		crearArchivoEntrada("3 3 1 2\n1 3 10\n2 3 5\n");
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 		gestor.leerPrimeraLinea();
@@ -118,7 +118,7 @@ class GestorArchivosTests {
 
 	@Test
 	void cantidadDeVecinosIncorrecta() throws IOException {
-		crearArchivoEntrada("4 2 1 2\n1 2 10\n2 3 5\n");
+		crearArchivoEntrada("4 2 1 2\n1 3 10\n2 3 5\n");
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 		gestor.leerPrimeraLinea();
@@ -136,7 +136,7 @@ class GestorArchivosTests {
 
 	@Test
 	void cantidadDeLazosYVecinosIncorrecta() throws IOException {
-		crearArchivoEntrada("5 3 1 2\n1 2 10\n2 3 5\n");
+		crearArchivoEntrada("5 3 1 2\n1 3 10\n2 3 5\n");
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 		gestor.leerPrimeraLinea();

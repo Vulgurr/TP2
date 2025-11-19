@@ -3,5 +3,5 @@ limiteSuperiorVecinos=200
 limiteLazos=5000
 limiteInferiorFuerzaLazos=1
 limiteSuperiorFuerzaLazos=100
-archivoEntrada="-Test-06-LazosYVecinosMalDefinidos.IN"
+archivoEntrada="ALIADOS.IN"
 archivoSalida="ALIADOS.OUT"
