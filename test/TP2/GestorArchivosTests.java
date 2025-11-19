@@ -75,9 +75,14 @@ class GestorArchivosTests {
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
 			gestor.leerPrimeraLinea();
-		});
+		}, "Expected IllegalArgumentException for primera línea mal formateada, but received: no exception");
+
+		String receivedMessage = exception.getMessage();
+		assertTrue(receivedMessage.startsWith("La primera línea no es válida:"),
+				"Expected exception message to start with \"La primera línea no es válida:\", but received: \""
+						+ receivedMessage + "\"");
 	}
 
 	@Test
@@ -172,9 +177,14 @@ class GestorArchivosTests {
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 
-		assertThrows(Exception.class, () -> {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
 			gestor.leerPrimeraLinea();
-		});
+		}, "Expected IllegalArgumentException for archivo vacío, but received: no exception");
+
+		String expectedMessage = "El archivo está vacío";
+		String receivedMessage = exception.getMessage();
+		assertEquals(expectedMessage, receivedMessage,
+				"Expected exception message: \"" + expectedMessage + "\", but received: \"" + receivedMessage + "\"");
 	}
 
 	@Test
@@ -248,15 +258,63 @@ class GestorArchivosTests {
 
 	@Test
 	void archivoConLineasVacias() throws IOException {
-		crearArchivoEntrada("3 2 1 2\n\n1 3 10\n");
+		crearArchivoEntrada("3 2 1 2\n\n1 3 10\n2 3 5\n");
 
 		GestorArchivos gestor = new GestorArchivos(directorioTest);
 		gestor.leerPrimeraLinea();
 		GestorVecinos vecinos = new GestorVecinos(1, 2);
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertDoesNotThrow(() -> {
 			gestor.leerArchivoConGestor(vecinos);
-		}, "Expected IllegalArgumentException for línea vacía, but received: no exception");
+		}, "Expected: no exception (líneas vacías se ignoran), but received: exception thrown");
+	}
+
+	@Test
+	void archivoConSoloLineasVacias() throws IOException {
+		crearArchivoEntrada("\n\n\n");
+
+		GestorArchivos gestor = new GestorArchivos(directorioTest);
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			gestor.leerPrimeraLinea();
+		}, "Expected IllegalArgumentException for archivo con solo líneas vacías, but received: no exception");
+
+		String expectedMessage = "El archivo está vacío";
+		String receivedMessage = exception.getMessage();
+		assertEquals(expectedMessage, receivedMessage,
+				"Expected exception message: \"" + expectedMessage + "\", but received: \"" + receivedMessage + "\"");
+	}
+
+	@Test
+	void primeraLineaConFormatoIncorrecto() throws IOException {
+		crearArchivoEntrada("abc def ghi jkl\n1 2 10\n");
+
+		GestorArchivos gestor = new GestorArchivos(directorioTest);
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			gestor.leerPrimeraLinea();
+		}, "Expected IllegalArgumentException for primera línea con formato incorrecto, but received: no exception");
+
+		String receivedMessage = exception.getMessage();
+		assertTrue(receivedMessage.startsWith("La primera línea no es válida:"),
+				"Expected exception message to start with \"La primera línea no es válida:\", but received: \""
+						+ receivedMessage + "\"");
+	}
+
+	@Test
+	void primeraLineaConMenosValores() throws IOException {
+		crearArchivoEntrada("5 3\n1 2 10\n");
+
+		GestorArchivos gestor = new GestorArchivos(directorioTest);
+
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+			gestor.leerPrimeraLinea();
+		}, "Expected IllegalArgumentException for primera línea con menos valores, but received: no exception");
+
+		String receivedMessage = exception.getMessage();
+		assertTrue(receivedMessage.startsWith("La primera línea no es válida:"),
+				"Expected exception message to start with \"La primera línea no es válida:\", but received: \""
+						+ receivedMessage + "\"");
 	}
 
 }

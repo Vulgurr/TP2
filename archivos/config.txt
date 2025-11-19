@@ -3,5 +3,5 @@ limiteSuperiorVecinos=200
 limiteLazos=5000
 limiteInferiorFuerzaLazos=1
 limiteSuperiorFuerzaLazos=100
-archivoEntrada="ALIADOS.IN"
+archivoEntrada="Gana2a0.IN"
 archivoSalida="ALIADOS.OUT"

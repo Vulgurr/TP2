@@ -69,10 +69,23 @@ public class GestorArchivos {
 			String linea;
 
 			linea = br.readLine();
-			valores = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
-			// ---------------------------------------
-			verificacion.primeraLinea(valores);
-			// ---------------------------------------
+			// Ignorar líneas vacías hasta encontrar una línea válida
+			while (linea != null && linea.trim().isEmpty()) {
+				linea = br.readLine();
+			}
+			if (linea == null) {
+				throw new IllegalArgumentException("El archivo está vacío");
+			}
+			try {
+				valores = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
+				// ---------------------------------------
+				verificacion.primeraLinea(valores);
+				// ---------------------------------------
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException("La primera línea no es válida: " + e.getMessage());
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException("La primera línea no es válida: " + e.getMessage());
+			}
 			cantidadVecinos = valores[0];
 			cantidadLazos = valores[1];
 			vecinos[0] = valores[2];
@@ -95,6 +108,11 @@ public class GestorArchivos {
 			int[] valores = new int[3];
 			Set<Integer> totalVecinos = new HashSet<Integer>();
 			while ((linea = br.readLine()) != null) {
+				// Ignorar líneas vacías o que solo contengan espacios en blanco
+				if (linea.trim().isEmpty()) {
+					cont++;
+					continue;
+				}
 
 				valores = Arrays.stream(linea.split(" ")).mapToInt(Integer::parseInt).toArray();
 				// ---------------------------------------
