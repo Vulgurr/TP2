@@ -6,23 +6,25 @@ import java.util.Objects;
 
 public class Vecino {
 	private int numero;
-	private Map<Integer, Integer> amistades= new HashMap<Integer, Integer>();
-	public Vecino(int numero)
-	{
-		this.numero=numero;
+	private Map<Integer, Integer> amistades = new HashMap<Integer, Integer>();
+
+	public Vecino(int numero) {
+		this.numero = numero;
 	}
-	public void agregarAmistad(int numero, int amistad)
-	{
+
+	public void agregarAmistad(int numero, int amistad) {
 		amistades.put(numero, amistad);
 	}
-	public int nivelDeAmistadCon(Integer numero)
-	{
+
+	public int nivelDeAmistadCon(Integer numero) {
 		return amistades.getOrDefault(numero, 0);
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(numero);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -34,10 +36,9 @@ public class Vecino {
 		Vecino other = (Vecino) obj;
 		return numero == other.numero;
 	}
-	
-	public int getNumero()
-	{
+
+	public int getNumero() {
 		return this.numero;
 	}
-	
+
 }

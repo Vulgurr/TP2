@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class testGestorVecinos {
-	public String printearLazo(int vecino1, int vecino2, int fuerzaLazo)
-	{
-		String res="Vecino 1: " + vecino1+", Vecino 2: "+vecino2+", fuerza del lazo: "+fuerzaLazo;
+class GestorVecinosTests {
+	public String printearLazo(int vecino1, int vecino2, int fuerzaLazo) {
+		String res = "Vecino 1: " + vecino1 + ", Vecino 2: " + vecino2 + ", fuerza del lazo: " + fuerzaLazo;
 		return res;
 	}
+
 	@Test
 	void vecinosNoRelevantes() {
 		GestorVecinos gestor = new GestorVecinos(1, 2);

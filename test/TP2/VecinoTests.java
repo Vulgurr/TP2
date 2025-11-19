@@ -4,13 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class testVecino {
+class VecinoTests {
 
 	@Test
-	void mismoLazo_SeActualiza() {
+	void mismoLazoSeActualiza() {
 		Vecino pepe = new Vecino(1);
 
-		pepe.agregarAmistad(3, 10);
 		pepe.agregarAmistad(3, 10);
 
 		int expectedAmistad = 10;
@@ -24,16 +23,14 @@ class testVecino {
 		assertEquals(expectedAmistad, receivedAmistad,
 				"Expected nivel de amistad actualizado: " + expectedAmistad + ", but received: " + receivedAmistad);
 	}
-	
+
 	@Test
-	void lazoNoExiste_DevuelveCero() {
+	void lazoNoExisteDevuelveCero() {
 		Vecino pepe = new Vecino(1);
 		int expectedAmistad = 0;
 		int receivedAmistad = pepe.nivelDeAmistadCon(3);
 		assertEquals(expectedAmistad, receivedAmistad,
 				"Expected nivel de amistad: " + expectedAmistad + ", but received: " + receivedAmistad);
 	}
-	
-	
 
 }
