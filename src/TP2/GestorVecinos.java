@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GestorVecinos {
-	Vecino lider1; //2 5 9
-	Vecino lider2; // 3 5 8
-	Set<Integer> totalVecinosAConsiderar; // 2 3 5 8 9
+	private Vecino lider1; //2 5 9
+	private Vecino lider2; // 3 5 8
+	private Set<Integer> totalVecinosAConsiderar; // 2 3 5 8 9
 
 	public GestorVecinos(int lider1, int lider2) {
 		if(lider1==lider2)
@@ -67,6 +67,19 @@ public class GestorVecinos {
 
 
 	public int getCantidadVecinos() {
-		return totalVecinosAConsiderar.size() - 1;
+		return totalVecinosAConsiderar.size();
 	}
+	
+	public int getNumeroLider1()
+	{
+		return lider1.getNumero();
+	}
+	public int getNumeroLider2()
+	{
+		return lider2.getNumero();
+	}
+	
+	
+	
+
 }

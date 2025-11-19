@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GestorArchivos {
 	int cantidadVecinos;
@@ -56,10 +58,7 @@ public class GestorArchivos {
 	        		limiteLazos, limiteInferiorFuerzaLazos, limiteSuperiorFuerzaLazos, 
 	        		directorioBase, archivoEntrada, archivoSalida);
 
-	    } catch (IOException e) {
-	    	 // ---------------------------------------
-		     // Manejar tipos de excepciones y mensajes
-		     // ---------------------------------------
+	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
 		return null;
@@ -99,6 +98,7 @@ public class GestorArchivos {
 	        int contLazos=0;
 	        linea = br.readLine(); //Para saltar la primera linea
 	        int[] valores = new int[3];
+	        Set<Integer> totalVecinos = new HashSet<Integer>();
 	        while ((linea = br.readLine()) != null) {
 	        	
 	        	valores = Arrays.stream(linea.split(" "))
@@ -108,12 +108,14 @@ public class GestorArchivos {
 		   	     verificacion.enLinea(valores, cont);
 		   	     // ---------------------------------------
 	        	gestor.agregarAmistades(valores[0], valores[1], valores[2]);
+	        	totalVecinos.add(valores[0]);
+	        	totalVecinos.add(valores[1]);
 	        	cont++;
 	        	contLazos++;
 	        }
 
 	        // ---------------------------------------
-	        verificacion.finalDeLectura(contLazos, cantidadLazos, gestor.getCantidadVecinos()+2, cantidadVecinos);
+	        verificacion.finalDeLectura(contLazos, cantidadLazos, totalVecinos.size(), cantidadVecinos);
 	        
 		     // ---------------------------------------
 	    } catch (IOException e) {

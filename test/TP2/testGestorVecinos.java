@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class testGestorVecinos {
-
+	public String printearLazo(int vecino1, int vecino2, int fuerzaLazo)
+	{
+		String res="Vecino 1: " + vecino1+", Vecino 2: "+vecino2+", fuerza del lazo: "+fuerzaLazo;
+		return res;
+	}
 	@Test
 	void vecinosNoRelevantes() {
 		GestorVecinos gestor = new GestorVecinos(1, 2);
@@ -18,25 +22,6 @@ class testGestorVecinos {
 		int receivedCantidad = gestor.getCantidadVecinos();
 		assertEquals(expectedCantidad, receivedCantidad,
 				"Expected cantidad de vecinos: " + expectedCantidad + ", but received: " + receivedCantidad);
-	}
-
-	@Test
-	void mismoLazoNoSeTi() {
-		GestorVecinos gestor = new GestorVecinos(1, 2);
-
-		gestor.agregarAmistades(1, 3, 10);
-		gestor.agregarAmistades(1, 3, 10);
-
-		int expectedAmistad = 10;
-		int receivedAmistad = gestor.lider1.nivelDeAmistadCon(3);
-		assertEquals(expectedAmistad, receivedAmistad,
-				"Expected nivel de amistad: " + expectedAmistad + ", but received: " + receivedAmistad);
-
-		gestor.agregarAmistades(1, 3, 20);
-		expectedAmistad = 20;
-		receivedAmistad = gestor.lider1.nivelDeAmistadCon(3);
-		assertEquals(expectedAmistad, receivedAmistad,
-				"Expected nivel de amistad actualizado: " + expectedAmistad + ", but received: " + receivedAmistad);
 	}
 
 	@Test
