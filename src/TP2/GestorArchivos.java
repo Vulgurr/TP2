@@ -99,7 +99,7 @@ public class GestorArchivos {
 		return lideres;
 	}
 
-	public void leerArchivoConGestor(GestorVecinos gestor) {
+	public void leerArchivoConGestor(GestorVecinos gestorVecino) {
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(config.archivoEntrada))) {
 			
@@ -124,7 +124,7 @@ public class GestorArchivos {
 				verificacion.enLinea(datosLazo, cont);				
 				// ---------------------------------------
 				
-				gestor.agregarAmistades(datosLazo[0], datosLazo[1], datosLazo[2]);
+				gestorVecino.agregarAmistades(datosLazo[0], datosLazo[1], datosLazo[2]);
 				
 				totalVecinos.add(datosLazo[0]);
 				totalVecinos.add(datosLazo[1]);

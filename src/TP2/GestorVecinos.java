@@ -57,18 +57,20 @@ public class GestorVecinos {
 
 	public int[] determinarAliados() {
 		
-		int[] v_cantAliados = new int[2];
+		int[] vCantAliados = new int[2];
 		
 		for (Integer vecino : totalVecinosAConsiderar) {
+			
 			int amistad1 = lider1.nivelDeAmistadCon(vecino);
 			int amistad2 = lider2.nivelDeAmistadCon(vecino);
+			
 			if (amistad1 > amistad2)
-				v_cantAliados[0]++;
+				vCantAliados[0]++;
 			else if (amistad2 > amistad1)
-				v_cantAliados[1]++;
+				vCantAliados[1]++;
 		}
 		
-		return v_cantAliados;
+		return vCantAliados;
 	}
 
 	public int getCantidadVecinos() {
