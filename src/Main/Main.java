@@ -9,40 +9,40 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		GestorArchivos g_archivos;
-		GestorVecinos g_vecinos;
+		GestorArchivos gArchivos;
+		GestorVecinos gVecinos;
 
 		try {
 			// PASO 1: Lee configuración del archivo config.txt
 			// GestorArchivos se encarga de leer los límites y rutas de archivos
-			g_archivos = new GestorArchivos("./archivos");
+			gArchivos = new GestorArchivos("./archivos");
 
 			// PASO 2: Lee primera línea del archivo de entrada
 			// Obtiene los dos líderes enfrentados y valida el formato
-			int[] lideresEnfrentados = g_archivos.leerPrimeraLinea();
+			int[] lideresEnfrentados = gArchivos.leerPrimeraLinea();
 
 			// PASO 3: Inicializa GestorVecinos con los dos líderes
 			// Crea los objetos líder y prepara la estructura para procesar lazos
-			g_vecinos = new GestorVecinos(lideresEnfrentados[0], lideresEnfrentados[1]);
+			gVecinos = new GestorVecinos(lideresEnfrentados[0], lideresEnfrentados[1]);
 
 			// PASO 4: Procesa todos los lazos del archivo
 			// Lee línea por línea, valida cada lazo, filtra los irrelevantes
 			// y agrega las amistades a los líderes correspondientes
-			g_archivos.leerArchivoConGestor(g_vecinos);
+			gArchivos.leerArchivoConGestor(gVecinos);
 
 			// PASO 5: Determina aliados de cada líder
 			// Compara la fuerza de amistad de cada vecino con ambos líderes
 			// Un vecino es aliado del líder con mayor fuerza de amistad
-			int[] v_cantAliadosFinal = g_vecinos.determinarAliados();
+			int[] vCantAliadosFinal = gVecinos.determinarAliados();
 
 			// PASO 6: Exporta resultados al archivo de salida
 			// Escribe el archivo .OUT con la cantidad de aliados de cada líder
-			g_archivos.exportarResultado(v_cantAliadosFinal);
+			gArchivos.exportarResultado(vCantAliadosFinal);
 			System.out.println("Se grabo correctamente el archivo de salida.");
 
 			// PASO 7: Muestra resultado final en consola
 			// Presenta de forma legible cuántos aliados tiene cada líder
-			enumerarAliados(g_vecinos, v_cantAliadosFinal);
+			enumerarAliados(gVecinos, vCantAliadosFinal);
 
 		} catch (IOException e) {
 			e.printStackTrace();
